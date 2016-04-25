@@ -1,0 +1,3 @@
+#Grails Factories File
+#Fri Apr 22 14:58:28 IST 2016
+grails.dev.commands.ApplicationCommand=ngplugin.CreateAngularControllerCommand,ngplugin.CreateAngularModuleCommand,ngplugin.CreateAngularRouteCommand,ngplugin.CreateAngularServiceCommand,ngplugin.CreateNgSkeletonCommand,ngplugin.CreateNgView2Command,ngplugin.CreateNgViewCommand

@@ -1,0 +1,18 @@
+<plugin name='ngplugin' version='0.1.94' grailsVersion='3.1.4 &gt; *'>
+  <type>ngplugin.NgpluginGrailsPlugin</type>
+  <author>Ghata Shah</author>
+  <title>Ngplugin</title>
+  <grailsVersion>3.1.4 &gt; *</grailsVersion>
+  <pluginExcludes>[grails-app/views/error.gsp]</pluginExcludes>
+  <authorEmail>ghata.shah@eclinicalworks.com</authorEmail>
+  <description>This plugin lets you create angular skeleton i.e Angular views, controller and services.
+</description>
+  <name>ngplugin</name>
+  <documentation>http://grails.org/plugin/ngplugin</documentation>
+  <profiles>[web]</profiles>
+  <version />
+  <resources>
+    <resource>ngplugin.UrlMappings</resource>
+    <resource>ngplugin.Application</resource>
+  </resources>
+</plugin>
