@@ -3,10 +3,6 @@ This is a Grails plugin that allows you to use Angular.js based scaffolding. It 
 
 <h3>Usage</h3>
 
-First install plugin into your application by declaring gradle dependency into build.gradle as follows:
-
-<pre>runtime "ngplugin:ngplugin:0.2"</pre>
-
 After installing plugin, create any domain class in your application, if there isn't any. 
 
 Lets say you have created MyDomain.groovy in com.foo package. Now, execute below grails command to create entire angular structure based on your domain.
