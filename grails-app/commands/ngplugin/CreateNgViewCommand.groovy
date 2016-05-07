@@ -105,22 +105,22 @@ class CreateNgViewCommand implements ApplicationCommand {
 			if(prop.type == String || prop.type instanceof Number){
 				file << '<div class="input-field col s12 m6">\n'
 				file << '	<input ng-model="ctrl.' +lowerCaseClassName + '.' +prop.name + '" id="'+prop.name+'" type="text" '+required+'>\n'
-				file << '	<label for="'+prop.name+'">'+prop.name?.capitalize()+'</label>\n'
+				file << '	<label for="'+prop.name+'">'+splitCamelCase(prop.name?.capitalize()) +'</label>\n'
 				file << '</div>\n'
 			} else if(prop.type == Date) {
 				file << '<div class="input-field col s12 m6">\n'
 				file << '	<input ng-model="ctrl.' +lowerCaseClassName + '.' +prop.name + '" id="'+prop.name+'" type="date" class="datepicker" '+required+'>\n'
-				file << '	<label for="'+prop.name+'" class="active">'+prop.name?.capitalize()+'</label>\n'
+				file << '	<label for="'+prop.name+'" class="active">'+splitCamelCase(prop.name?.capitalize())+'</label>\n'
 				file << '</div>\n'
 			} else if(prop.type == Boolean) {
 				file << '<div class="input-field col s12 m6">\n'
 				file << '	<input ng-model="ctrl.'+lowerCaseClassName + '.' +prop.name +'" id="'+ prop.name +'" type="checkbox" '+required+'/>\n'
-				file << '	<label for="'+ prop.name +'" class="align">'+prop.name?.capitalize()+'</label>\n'
+				file << '	<label for="'+ prop.name +'" class="align">'+splitCamelCase(prop.name?.capitalize())+'</label>\n'
 				file << '</div>\n'
 			} else if(prop.type.isEnum()) {
 				file << '<div class="input-field col s12 m6">\n'
 				file << '	<select id="'+ prop.name +'" ng-model="ctrl.'+lowerCaseClassName + '.' +prop.name +'">\n'
-				file << '		<option value="">'+prop.name?.capitalize()+'</option>\n'
+				file << '		<option value="">'+splitCamelCase(prop.name?.capitalize())+'</option>\n'
 				prop?.type?.enumConstantsShared?.each{ ec ->
 					file << '		<option value="'+ec+'">'+ec?.value+'</option>\n'
 				}
@@ -143,7 +143,7 @@ class CreateNgViewCommand implements ApplicationCommand {
 			} else if(prop.type instanceof Collection) {} else {
 				file << '<div class="input-field col s12 m6">\n'
 				file << '	<input ng-model="ctrl.' +lowerCaseClassName + '.' +prop.name + '" id="'+prop.name+'" type="text" '+required+'>\n'
-				file << '	<label for="'+prop.name+'">'+prop.name.capitalize()+'</label>\n'
+				file << '	<label for="'+prop.name+'">'+splitCamelCase(prop.name?.capitalize())+'</label>\n'
 				file << '</div>\n'
 			}
 		}
@@ -162,7 +162,7 @@ class CreateNgViewCommand implements ApplicationCommand {
 		file << '	<table>\n'
 		file << '		<tr>\n'
 		domainProperties?.each{ prop ->
-			file << '			<th>'+prop.name.capitalize()+'</th>\n'
+			file << '			<th>'+splitCamelCase(prop.name?.capitalize())+'</th>\n'
 		}
 		file << '		</tr>\n'
 		file << '		<tr ng-repeat="'+lowerCaseClassName+' in ctrl.'+lowerCaseClassName+'s">\n'
@@ -189,5 +189,15 @@ class CreateNgViewCommand implements ApplicationCommand {
 		file << '<input class="btn red white-text" type="submit" ng-click="ctrl.delete('+lowerCaseClassName+')" value="Delete" />\n'
 		file << '</div>\n'
 		file << '</div>\n'
-	}	
+	}
+	static String splitCamelCase(String s) {
+		return s.replaceAll(
+				String.format("%s|%s|%s",
+						"(?<=[A-Z])(?=[A-Z][a-z])",
+						"(?<=[^A-Z])(?=[A-Z])",
+						"(?<=[A-Za-z])(?=[^A-Za-z])"
+				),
+				" "
+		);
+	}
 }
