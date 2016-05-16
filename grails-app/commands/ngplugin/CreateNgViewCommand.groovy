@@ -92,8 +92,9 @@ class CreateNgViewCommand implements ApplicationCommand {
 		return file
 	}
 	
-	def createInputsForDomain(domainProperties, File file, className, grailsApp, constrainedProperties) {
+	def createInputsForDomain(domainProperties, File file, className, grailsApp,Map constrainedProperties) {
 		def lowerCaseClassName = StringUtils.uncapitalize(className)
+
 		domainProperties?.each{ prop ->
 			String required = ''
 			if(constrainedProperties.containsKey(prop.name)){
